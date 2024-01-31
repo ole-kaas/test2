@@ -1,0 +1,64 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: traefik
+
+resources:
+  - namespace.yaml
+  - monitor-service.yaml
+
+helmCharts:
+  - name: traefik
+    namespace: traefik
+    releaseName: traefik-migration-21
+    repo: https://helm.traefik.io/traefik
+    version: 21.1.0
+    includeCRDs: true
+    valuesInline:
+      deployment:
+        replicas: 3
+
+      ingressClass:
+        fallbackApiVersion: "v1"
+
+      ingressRoute:
+        dashboard:
+          enabled: false
+
+      service:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          service.beta.kubernetes.io/azure-load-balancer-resource-group: ${KV_AZURE_RESOURCE_GROUP}
+        spec:
+          loadBalancerIP: ${KV_AZURE_IP_ADDRESS}
+
+      ports:
+        websecure:
+          tls:
+            enabled: true
+        metrics:
+          port: 8082
+
+      logs:
+        general:
+          format: json
+        access:
+          enabled: true
+          format: json
+
+      metrics:
+        prometheus:
+          entryPoint: metrics
+          addRoutersLabels: true
+
+      providers:
+        kubernetesCRD:
+          allowCrossNamespace: true
+        kubernetesIngress:
+          publishedService:
+            enabled: true
+
+      additionalArguments:
+        - "--entrypoints.web.http.redirections.entryPoint.to=:443"
+        - "--entrypoints.web.http.redirections.entrypoint.permanent=false"
+        - "--entrypoints.web.http.redirections.entrypoint.priority=10"
