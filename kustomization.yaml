@@ -11,7 +11,7 @@ helmCharts:
     namespace: traefik
     releaseName: traefik-migration-21
     repo: https://helm.traefik.io/traefik
-    version: 26.0.0
+    version: 27.0.2
     includeCRDs: true
     valuesInline:
       deployment:
