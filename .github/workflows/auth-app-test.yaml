@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.generate-token.outputs.token }}
-          path: test
+          path: test2
           persist-credentials: false
 
       - uses: actions/checkout@v4
@@ -37,14 +37,14 @@ jobs:
         run: |
           set -x
           echo $GH_TOKEN
-          date > /renovatetest/date.txt
+          date > /test2/date.txt
           date > /renovatetest/date.txt
           ls -l
 
       - uses: EndBug/add-and-commit@v9
         id: commit
         with:
-          add: '["/test/date.txt", "/renovatetest/date.txt"]'
+          add: '["/test2/date.txt", "/renovatetest/date.txt"]'
           message: Update date in date file
           push: --force
           default_author: github_actions
