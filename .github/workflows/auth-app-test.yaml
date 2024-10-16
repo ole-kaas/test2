@@ -18,8 +18,8 @@ jobs:
           private-key: ${{ secrets.APP_PEM }}
 
       - uses: actions/checkout@v4
-        env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Make something up
         run: |
