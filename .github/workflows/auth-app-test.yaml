@@ -52,14 +52,4 @@ jobs:
           cwd: './renovatetest/'
           default_author: github_actions
 
-      - name: Mess with repo
-        run: |
-          set -x
-          echo $GH_TOKEN
-          # git config user.email "noreply@github.com"
-          git status
-          #date > date.txt
-          #git add date.txt
-          #git commit -m 'update date in date file'
-          #git push
-          #ls -l 
+
