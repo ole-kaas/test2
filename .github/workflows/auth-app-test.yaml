@@ -18,14 +18,14 @@ jobs:
           private-key: ${{ secrets.APP_PEM }}
 
       - uses: actions/checkout@v4
-      
-      - name: Use the Token
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+      
+      - name: Mess with repo
         run: |
           set -x
           echo $GH_TOKEN
-          git config user.email "noreply@github.com"
+          # git config user.email "noreply@github.com"
           git status
           date > date.txt
           git add date.txt
