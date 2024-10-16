@@ -1,5 +1,5 @@
 #
-name: Add PR to project
+name: Test Auth App
 # This workflow runs whenever a pull request in the repository is marked as "ready for review".
 on:
   workflow_dispatch: {}
@@ -10,14 +10,18 @@ jobs:
   track_pr:
     runs-on: ubuntu-latest
     steps:
-    # Uses the [actions/create-github-app-token](https://github.com/marketplace/actions/create-github-app-token) action to generate an installation access token for your app from the app ID and private key. The installation access token is accessed later in the workflow as `${{ steps.generate-token.outputs.token }}`.
-    #
-    # Replace `APP_ID` with the name of the configuration variable that contains your app ID.
-    #
-    # Replace `APP_PEM` with the name of the secret that contains your app private key.
       - name: Generate token
         id: generate-token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PEM }}
+
+      - uses: actions/checkout@v4
+      
+      - name: Use the Token
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          echo $GH_TOKEN
+          git status
