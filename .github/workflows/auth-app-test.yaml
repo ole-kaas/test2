@@ -25,3 +25,8 @@ jobs:
         run: |
           echo $GH_TOKEN
           git status
+          date > date.txt
+          git add date.txt
+          git commit -m 'update date in date file'
+          git push
+          ls -l 
