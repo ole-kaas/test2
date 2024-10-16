@@ -38,8 +38,8 @@ jobs:
           set -x
           ls -l
           echo $GH_TOKEN
-          date > /test2/date.txt
-          date > /renovatetest/date.txt
+          date > test2/date.txt
+          date > renovatetest/date.txt
           ls -l
           tree
 
