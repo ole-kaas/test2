@@ -24,14 +24,14 @@ jobs:
         with:
           token: ${{ steps.generate-token.outputs.token }}
           path: test2
-          persist-credentials: false
+          # persist-credentials: false
 
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.generate-token.outputs.token }}
           repository: 'ole-kaas/renovatetest'
           path: renovatetest
-          persist-credentials: false
+          # persist-credentials: false
 
       - name: Make something up
         run: |
