@@ -36,10 +36,12 @@ jobs:
       - name: Make something up
         run: |
           set -x
+          ls -l
           echo $GH_TOKEN
           date > /test2/date.txt
           date > /renovatetest/date.txt
           ls -l
+          tree
 
       - uses: EndBug/add-and-commit@v9
         id: commit
