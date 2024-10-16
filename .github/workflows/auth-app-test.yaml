@@ -23,7 +23,9 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         run: |
+          set -x
           echo $GH_TOKEN
+          git config user.email "noreply@github.com"
           git status
           date > date.txt
           git add date.txt
