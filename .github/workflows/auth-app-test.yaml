@@ -44,15 +44,7 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         id: commit
         with:
-          add: '["/renovatetest/date.txt"]'
-          message: Update date in date file
-          push: --force
-          default_author: github_actions
-
-      - uses: EndBug/add-and-commit@v9
-        id: commit
-        with:
-          add: '["/test/date.txt"]'
+          add: '["/test/date.txt", "/renovatetest/date.txt"]'
           message: Update date in date file
           push: --force
           default_author: github_actions
