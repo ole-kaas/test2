@@ -46,7 +46,7 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         id: commit
         with:
-          add: '["/date.txt"]'
+          add: '["date.txt"]'
           message: Update date in date file
           push: --force
           cwd: './renovatetest/'
