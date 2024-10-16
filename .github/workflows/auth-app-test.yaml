@@ -20,6 +20,21 @@ jobs:
       - uses: actions/checkout@v4
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      - name: Make something up
+        run: |
+          set -x
+          echo $GH_TOKEN
+          date > date.txt
+          ls -l
+
+      - uses: EndBug/add-and-commit@v9
+        id: commit
+        with:
+          add: '["date.txt"]'
+          message: Update date in date file
+          push: --force
+          default_author: github_actions
       
       - name: Mess with repo
         run: |
@@ -27,8 +42,8 @@ jobs:
           echo $GH_TOKEN
           # git config user.email "noreply@github.com"
           git status
-          date > date.txt
-          git add date.txt
-          git commit -m 'update date in date file'
-          git push
-          ls -l 
+          #date > date.txt
+          #git add date.txt
+          #git commit -m 'update date in date file'
+          #git push
+          #ls -l 
