@@ -43,7 +43,7 @@ jobs:
           ls -l
           tree
 
-      - uses: EndBug/add-and-commit@v9
+      - uses: EndBug/add-and-commit@v11
         id: commit
         with:
           add: '["date.txt"]'
